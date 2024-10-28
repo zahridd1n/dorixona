@@ -1,35 +1,52 @@
 from pathlib import Path
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+import os
+from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-=kyil+)0^uh=z1^ch(2$=nc6bv@9li^ya_j5jd7((ljzu_r$r-'
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
-# Application definition
+# ============================INSTALLED_APPS============================
 
-INSTALLED_APPS = [
+DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'main',
-    'rest_framework',
-    'corsheaders',
 ]
+
+THIRD_PARTY_APPS = [
+
+    'rest_framework',
+    'drf_yasg',
+    'corsheaders',
+    # 'ckeditor',
+    # 'ckeditor_uploader',
+]
+
+CUSTOM_APPS = [
+    'main',
+]
+
+
+INSTALLED_APPS = DJANGO_APPS + CUSTOM_APPS + THIRD_PARTY_APPS
+
+# ============================MIDDLEWARES============================
+
 CORS_ALLOW_ALL_ORIGINS = True
 
-MIDDLEWARE = [
+CORS_MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+]
+
+DJANGO_MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
@@ -40,6 +57,33 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+
+MIDDLEWARE = CORS_MIDDLEWARE + DJANGO_MIDDLEWARE
+
+# ============================SETTINGS CK EDITOR============================
+
+
+CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
+CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            ['Bold', 'Italic', 'Underline'],
+            ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter',
+             'JustifyRight', 'JustifyBlock'],
+            ['Link', 'Unlink'],
+            ['Font', 'TextColor'],
+            ['Format'],
+            ['RemoveFormat', 'Source']
+        ],
+        'extraPlugins': 'font,colorbutton,format',
+        'format_tags': 'p;h1;h2;h3;h4;h5;h6'
+    }
+}
+
+
 
 ROOT_URLCONF = 'config.urls'
 
@@ -62,8 +106,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-# Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
+# ============================DATABASE SQLITE============================
+
 
 DATABASES = {
     'default': {
@@ -72,8 +116,21 @@ DATABASES = {
     }
 }
 
-# Password validation
-# https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
+# ============================DATABASE POSTGRESQL============================
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'dorixona',
+#         'USER': 'postgres',
+#         'PASSWORD': 'dorixona28',
+#         # 'HOST': 'localhost',
+#         'HOST': 'bu yerga IP joylanadi',
+#         'PORT': '5432',
+#     }
+# }
+
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -104,11 +161,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') 
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

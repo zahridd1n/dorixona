@@ -1,0 +1,19 @@
+version: '3.13'
+
+services:
+  web:
+    build: .
+    volumes:
+      - .:/app  # Bu sizning loyihangizdagi barcha fayllarni konteynerga ulaydi
+    ports:
+      - "8000:8000"
+
+  nginx:
+    image: nginx:latest
+    volumes:
+    - ./nginx_config:/etc/nginx/conf.d  # Nginx konfiguratsiyasi
+    - ./static:/app/staticfiles 
+    ports:
+      - "80:80"
+    depends_on:
+      - web
