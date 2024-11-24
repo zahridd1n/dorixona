@@ -1,1 +1,1 @@
-from .about import *
+from .candidates import *

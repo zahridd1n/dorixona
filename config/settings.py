@@ -26,6 +26,7 @@ THIRD_PARTY_APPS = [
     'rest_framework',
     'drf_yasg',
     'corsheaders',
+    'rest_framework.authtoken'
     # 'ckeditor',
     # 'ckeditor_uploader',
 ]
@@ -60,6 +61,14 @@ DJANGO_MIDDLEWARE = [
 
 
 MIDDLEWARE = CORS_MIDDLEWARE + DJANGO_MIDDLEWARE
+
+
+# ==============================Rest_Framework =================
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+}
 
 # ============================SETTINGS CK EDITOR============================
 
