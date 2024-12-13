@@ -1,7 +1,7 @@
 from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
 from colorfield.fields import ColorField
-
+from django.utils.text import slugify
 class ImageFon(models.Model):
     name = models.CharField(max_length=100, verbose_name="Nomi")
     color = models.CharField(max_length=25, verbose_name="Rang")
@@ -32,7 +32,8 @@ class Product(models.Model):
     description_uz = RichTextUploadingField(verbose_name="Mahsulot haqida batafsil uz tilida")
     description_ru = RichTextUploadingField(verbose_name="Mahsulot haqida batafsil ru tilida")
     description_en = RichTextUploadingField(verbose_name="Mahsulot haqida batafsil en tilida")
-
+    slug = models.SlugField(unique=True, db_index=True,null=True,blank=True,verbose_name="Bu yerga hech nima yozilmasin ")
+    active = models.BooleanField(default=False,verbose_name="Asosiy sahifada chiqishini hohlasangiz yoqing")
     background = models.ForeignKey(
         'ImageFon', on_delete=models.SET_NULL, null=True, verbose_name="Orqa fon"
     )
@@ -40,6 +41,11 @@ class Product(models.Model):
     image2 = models.ImageField(upload_to="product/image")
     image3 = models.ImageField(upload_to="product/image")
     image4 = models.ImageField(upload_to="product/image")
+
+    def save(self, *args, **kwargs):
+        if not self.slug and self.name_en:
+            self.slug = slugify(self.name_en)  # name_en asosida slug yaratish
+        super(Product, self).save(*args, **kwargs)  # Asl save metodini chaqirish
 
     class Meta:
         verbose_name = "Mahsulot"

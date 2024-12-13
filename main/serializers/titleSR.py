@@ -68,3 +68,13 @@ class TitleProductDetailSR(BaseTitleSR):
         model = TitleProductDetail
 
 
+
+class TitleHederSR(BaseTitleSR):
+    class Meta(BaseTitleSR.Meta):
+        model = TitleHeader
+
+class AboutOfferTitleSR(BaseTitleSR):
+    class Meta(BaseTitleSR.Meta):
+        model = AboutOfferTitle
+
+

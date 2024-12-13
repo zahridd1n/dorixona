@@ -13,6 +13,7 @@ ALLOWED_HOSTS = ['*']
 # ============================INSTALLED_APPS============================
 
 DJANGO_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -37,6 +38,16 @@ CUSTOM_APPS = [
 
 
 INSTALLED_APPS = DJANGO_APPS + CUSTOM_APPS + THIRD_PARTY_APPS
+
+
+
+JAZZMIN_SETTINGS = {
+    "site_title": "My Site Admin",  # Admin paneli sarlavhasi
+    "site_header": "My Site",  # Admin paneli yuqori sarlavhasi
+    "site_brand": "My Site",  # Brend nomi
+    "welcome_sign": "Welcome to the admin panel",  # Xush kelibsiz xabari
+    # boshqa sozlamalar
+}
 
 # ============================MIDDLEWARES============================
 
@@ -179,7 +190,7 @@ USE_TZ = True
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-STATIC_URL = '/static/'
+STATIC_URL = '/static/'  # Bu URL orqali statik fayllarga kirish mumkin
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL = '/media/'

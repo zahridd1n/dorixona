@@ -20,3 +20,11 @@ class Offers2(BaseTitle):
     class Meta:
         verbose_name = "Yutuqlarimiz2"
         verbose_name_plural = "Yutuqlarimiz2"
+
+class About_offers(Offers2):
+    class Meta:
+        verbose_name = "About Sahifasidagi yutuqlar"
+        verbose_name_plural = "About Sahifasidagi yutuqlar"
+
+
+    

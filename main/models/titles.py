@@ -67,3 +67,11 @@ class TitleContact(BaseTitle):
 class TitleProductDetail(BaseTitle):
     class Meta(BaseMetaMixin.generate_meta("Product detail sahifasi")):
         pass
+
+class TitleHeader(BaseTitle):
+    class Meta(BaseMetaMixin.generate_meta("Bo'sh bo'lim sahifasi")):
+        pass
+
+class AboutOfferTitle(BaseTitle):
+    class Meta(BaseMetaMixin.generate_meta("Haqimizda ustunligimiz ")):
+        pass

@@ -2,78 +2,49 @@ from rest_framework import serializers
 from main.models.product import Product
 from main.serializers.functions import GeneralMixin
 
-# class ProductSerializer(serializers.ModelSerializer, GeneralMixin):
-#     name = serializers.SerializerMethodField()
-#     detail = serializers.SerializerMethodField()
-
-
-#     class Meta:
-#         model = Product
-#         fields = ('name_uz', 'fields_uz', 'detail_uz', 'content_uz', 'description_uz', )
-
-#     def get_name(self, obj):
-#         return self.get_translated_field(obj, 'name')
-
-
-#     def get_fields(self, obj):
-#         return self.get_translated_field(obj, 'fields')
-
-#     def get_detail(self, obj):
-#         return self.get_translated_field(obj, 'detail')
-
-
-
 class ProductSerializer(serializers.ModelSerializer, GeneralMixin):
     name = serializers.SerializerMethodField()
     detail = serializers.SerializerMethodField()
     content = serializers.SerializerMethodField()
     description = serializers.SerializerMethodField()
-    # fields = serializers.SerializerMethodField()
     detailmini = serializers.SerializerMethodField()
-
-
-
+    images = serializers.SerializerMethodField()  # Barcha rasmlar uchun yangi field
     class Meta:
         model = Product
-        fields = ('name','detail','content','description','detailmini','image1', 'image2', 'image3', 'image4')
+        fields = ('slug','name', 'detail', 'content', 'description', 'detailmini', 'background','images',)
+        depth = 1
 
     def get_name(self, obj):
         return self.get_translated_field(obj, 'name')
-    def get_detailmini(self, obj):
-        
-        detailmini = self.get_translated_field(obj, 'detailmini')
-        result = []
 
-        for item in detailmini.split(","):
-            result.append(item.strip())
-        return result
+    def get_detailmini(self, obj):
+        return self._get_translated_list(obj, 'detailmini')
 
     def get_detail(self, obj):
-        detail = self.get_translated_field(obj, 'detail')  # Detailni olish
-        
-        detail_lines = detail.split("\r\n")  # Yangi qatorlar bo'yicha ajratish
-        
-        # 'key=value' formatidagi qiymatlarni ajratish
-        result = []
-        for line in detail_lines:
-            if "=" in line:
-                key, value = line.split("=", 1)  # '=' bo'yicha ajratish
-                result.append([key.strip(), value.strip()])  # Bo'sh joylarni olib tashlash
-        
-        return result  # Natijani qaytarish
-    
+        return self._get_translated_dict(obj, 'detail')
+
     def get_content(self, obj):
-        content =  self.get_translated_field(obj, 'content')
-
-        content_lines = content.split("\r\n")
-        result = []
-        for line in content_lines:
-            if "=" in line:
-                key,value=line.split("=",1)
-                result.append([key.strip(),value.strip()])
-        return result
-
-    
+        return self._get_translated_dict(obj, 'content')
 
     def get_description(self, obj):
         return self.get_translated_field(obj, 'description')
+
+    def get_images(self, obj):
+        """Barcha rasmlarni ro'yxat shaklida qaytaradi."""
+        images = [obj.image1.url, obj.image2.url, obj.image3.url, obj.image4.url]
+        return [img for img in images if img]  # Faqat mavjud bo'lgan rasmlar
+    # Yordamchi metodlar
+    def _get_translated_list(self, obj, field_name):
+        """Bo'sh joylar bilan ajratilgan so'zlar ro'yxatini qaytaradi."""
+        field_value = self.get_translated_field(obj, field_name)
+        return [item.strip() for item in field_value.split(",")]
+
+    def _get_translated_dict(self, obj, field_name):
+        """'key=value' formatida bo'lgan qiymatlarni ajratib, lug'at shaklida qaytaradi."""
+        field_value = self.get_translated_field(obj, field_name)
+        result = []
+        for line in field_value.split("\r\n"):
+            if "=" in line:
+                key, value = line.split("=", 1)
+                result.append([key.strip(), value.strip()])
+        return result
