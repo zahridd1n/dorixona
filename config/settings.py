@@ -26,9 +26,9 @@ THIRD_PARTY_APPS = [
     'rest_framework',
     'drf_yasg',
     'corsheaders',
-    'rest_framework.authtoken'
-    # 'ckeditor',
-    # 'ckeditor_uploader',
+    # 'rest_framework.authtoken'
+    'ckeditor',
+    'ckeditor_uploader',
 ]
 
 CUSTOM_APPS = [
@@ -96,10 +96,15 @@ CKEDITOR_CONFIGS = {
 
 ROOT_URLCONF = 'config.urls'
 
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR / 'templates',  # Loyihaning asosiy templates papkasi
+            ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -107,7 +112,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'django.template.context_processors.static',
+                'django.template.context_processors.static',  # Statik fayllar uchun
             ],
         },
     },

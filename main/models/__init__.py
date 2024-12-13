@@ -1,1 +1,6 @@
-from .candidates import *
+from .titles import *
+from .offers import *
+from .faq import *
+from .product import *
+
+
