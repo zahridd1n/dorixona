@@ -36,10 +36,10 @@ class FaqSerializer(serializers.Serializer, GeneralMixin):
         fields = ('question', 'answer')
 
     def get_question(self, obj):
-        return self.get_translated_field(obj, 'questions')
+        return self.get_translated_field(obj, 'question')
 
     def get_answer(self, obj):
-        return self.get_translated_field(obj, 'answers')
+        return self.get_translated_field(obj, 'answer')
     
 
 
