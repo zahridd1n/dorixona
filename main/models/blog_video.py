@@ -14,9 +14,13 @@ class Blog(models.Model):
     is_active = models.BooleanField(default=False,verbose_name="Asosiy sahifada ko'rinishi uchun aktivlashtiring")
     slug = models.SlugField(unique=True, db_index=True,null=True,blank=True,verbose_name="Bu yerga hech nima yozilmasin ")
 
-    def save(self,*args,**kwargs):
-        if not self.slug and self.title_uz:
-            self.slug = slugify(self.title_uz)
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            if self.title_uz:
+                self.slug = slugify(self.title_uz)
+            else:
+                self.slug = slugify("default-title")  # Agar title_uz bo'sh bo'lsa, default slug ishlatish
+        super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = "Bloglar"
