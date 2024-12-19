@@ -149,8 +149,8 @@ DATABASES = {
         'NAME': 'ghp',
         'USER': 'ghpuser',
         'PASSWORD': '6914760a',
-        'HOST': 'localhost',
-        # 'HOST': 'bu yerga IP joylanadi',
+        # 'HOST': 'localhost',
+        'HOST': '212.67.14.62',
         'PORT': '5432',
     }
 }
