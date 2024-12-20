@@ -6,7 +6,7 @@ from rest_framework import status
 from main.serializers.aboutSR import *
 from main.serializers.miniSR import *
 from main.serializers.titleSR import *
-
+from main.function import custom_response
 
 from rest_framework import serializers
 
@@ -32,13 +32,10 @@ class AboutView(APIView):
         about_title_serializer = AboutOfferTitleSR(AboutOfferTitle.objects.first(), context=context)
 
         # Natijani qaytarish
-        return Response({
-            'success': True,
-            'message': 'Success',
-            'data': {
-                'about': about_serializer.data,
-                'mini_about': mini_about_serializer.data,
-                'title': about_title_serializer.data,
-                'offers_about': about_offer_serializer.data,
-            }
+        return custom_response({
+            'about': about_serializer.data,
+            'mini_about': mini_about_serializer.data,
+            'title': about_title_serializer.data,
+            'offers_about': about_offer_serializer.data,
+            
         })

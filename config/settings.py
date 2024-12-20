@@ -2,8 +2,8 @@ from pathlib import Path
 import os
 from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-
+BOT_TOKEN = "7218359593:AAHdu2YxU_o3rM6HCazmdD-XhwBocebI__o"
+GROUP_ID = "-1002440816678"
 SECRET_KEY = 'django-insecure-=kyil+)0^uh=z1^ch(2$=nc6bv@9li^ya_j5jd7((ljzu_r$r-'
 
 DEBUG = True

@@ -3,7 +3,7 @@ from rest_framework.views import APIView
 from main.models.titles import *
 from main.serializers.titleSR import *
 from rest_framework import serializers
-
+from main.function import custom_response
 
 class Titles(APIView):
     def get(self, request, lang=None):
@@ -29,19 +29,17 @@ class Titles(APIView):
         title_product_detail_serializer = TitleProductDetailSR(TitleProductDetail.objects.first(),context=context) if TitleProductDetail.objects.exists() else None
 
         # Return response with all data
-        return Response({
-            'success': True,
-            'message': 'Success',
-            'data': {
-                'about_title': title_about_serializer.data if title_about_serializer else None,
-                'product_title': title_product_serializer.data if title_product_serializer else None,
-                'blog_title': title_blog_serializer.data if title_blog_serializer else None,
-                'video_title': title_video_serializer.data if title_video_serializer else None,
-                'offers_title': title_offers_serializer.data if title_offers_serializer else None,
-                'comments_title': title_comments_serializer.data if title_comments_serializer else None,
-                'faq_title': title_faq_serializer.data if title_faq_serializer else None,
-                'banner_title': title_banner_serializer.data if title_banner_serializer else None,
-                'contact_title': title_contact_serializer.data if title_contact_serializer else None,
-                'product_detail_title':title_product_detail_serializer.data if title_product_detail_serializer else None,
-            }
+        return custom_response({
+           
+            'about_title': title_about_serializer.data if title_about_serializer else None,
+            'product_title': title_product_serializer.data if title_product_serializer else None,
+            'blog_title': title_blog_serializer.data if title_blog_serializer else None,
+            'video_title': title_video_serializer.data if title_video_serializer else None,
+            'offers_title': title_offers_serializer.data if title_offers_serializer else None,
+            'comments_title': title_comments_serializer.data if title_comments_serializer else None,
+            'faq_title': title_faq_serializer.data if title_faq_serializer else None,
+            'banner_title': title_banner_serializer.data if title_banner_serializer else None,
+            'contact_title': title_contact_serializer.data if title_contact_serializer else None,
+            'product_detail_title':title_product_detail_serializer.data if title_product_detail_serializer else None,
+        
         })
