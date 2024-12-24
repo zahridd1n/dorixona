@@ -38,9 +38,9 @@ class Product(models.Model):
         'ImageFon', on_delete=models.SET_NULL, null=True, verbose_name="Orqa fon"
     )
     image1 = models.ImageField(upload_to="product/image")
-    image2 = models.ImageField(upload_to="product/image")
-    image3 = models.ImageField(upload_to="product/image")
-    image4 = models.ImageField(upload_to="product/image")
+    image2 = models.ImageField(upload_to="product/image",null=True,blank=True)
+    image3 = models.ImageField(upload_to="product/image",null=True,blank=True)
+    image4 = models.ImageField(upload_to="product/image",null=True,blank=True)
 
     def save(self, *args, **kwargs):
         if not self.slug and self.name_en:

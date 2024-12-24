@@ -21,10 +21,12 @@ class Offers2(BaseTitle):
         verbose_name = "Yutuqlarimiz2"
         verbose_name_plural = "Yutuqlarimiz2"
 
-class About_offers(Offers2):
+
+class About_offers3(BaseTitle):
+      # Offers2 ni meros qilib olishdan saqlanish
+    icon = models.ImageField(upload_to="offers/icon", verbose_name="Icon biriktiring")  # Nisbiy yo'l
+
     class Meta:
-        verbose_name = "About Sahifasidagi yutuqlar"
-        verbose_name_plural = "About Sahifasidagi yutuqlar"
-
-
+        verbose_name = "About sahifasi uchun offers11"
+        verbose_name_plural = "About sahifasi uchun offers11"
     

@@ -23,7 +23,7 @@ class OffersSerializer2(BaseTitleSR):
 
 class About_Offers_Serializer(BaseTitleSR):
     class Meta(BaseTitleSR.Meta):
-        model = About_offers
+        model = About_offers3
         fields = BaseTitleSR.Meta.fields + ('icon',)
 
 

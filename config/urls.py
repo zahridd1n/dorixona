@@ -5,7 +5,7 @@ from django.urls import path, include
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
-
+from main.views.sitemap import SiteMap,robots_txt
 schema_view = get_schema_view(
     openapi.Info(
         title="Dorixona API Documentation",
@@ -22,6 +22,8 @@ schema_view = get_schema_view(
 urlpatterns = [
                   path('admin/', admin.site.urls),
                   path('ckeditor/', include('ckeditor_uploader.urls')),
+                  path('sitemap.xml', SiteMap.as_view(), name='sitemap'),
+                  path('robots.txt', robots_txt),
                   path('api/', include([
                       path('api28/', include('main.urls')),
                       path('swagger<format>/', schema_view.without_ui(cache_timeout=0), name='schema-json'),
