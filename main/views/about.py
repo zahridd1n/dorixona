@@ -27,7 +27,7 @@ class AboutView(APIView):
         
         # Serializerlarni yaratish
         about_serializer = AboutSerializer(about_object, context=context)
-        about_offer_serializer = About_Offers_Serializer(About_offers1.objects.all(), context=context, many=True)
+        about_offer_serializer = About_Offers_Serializer(About_offers3.objects.all(), context=context, many=True)
         mini_about_serializer = MiniAboutSerializer(MiniAbout.objects.all(), context=context, many=True)
         about_title_serializer = AboutOfferTitleSR(AboutOfferTitle.objects.first(), context=context)
 
