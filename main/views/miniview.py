@@ -30,12 +30,13 @@ class MiniView(APIView):
 
         # Offers (takliflar) ro'yxatini olish va serializatsiya qilish
         offers_serializer = OffersSerializer2(Offers2.objects.all().order_by('id'), context=context, many=True)
-
+        social_serializer = SocialSR(Socials.objects.all(),context=context,many=True)
         # Barcha serializatsiya qilingan ma'lumotlarni custom_response yordamida qaytarish
         return custom_response({
             'faq': faq_serializer.data,  # FAQ ma'lumotlari
             'comments': comment_serializer.data,  # Izohlar
-            'offers': offers_serializer.data  # Takliflar
+            'offers': offers_serializer.data,
+            'socials':social_serializer.data  # Takliflar
         })
 
 

@@ -45,3 +45,7 @@ class MiniAboutSerializer(AboutSerializer):
 
 
         
+class SocialSR(serializers.ModelSerializer):
+    class Meta:
+        model = Socials
+        fields = '__all__'

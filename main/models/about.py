@@ -25,3 +25,12 @@ class MiniAbout(BaseTitle):
         verbose_name_plural = "Haqimizda sahifasi uchun qoshimchalar"
 
 
+class Socials(models.Model):
+    name = models.CharField(max_length=100,verbose_name="Ijtimoiy sahifa nomini kiriitng")
+    link = models.CharField(max_length=100,verbose_name="Ijtimoiy sahifa linkini kiriitng")
+    icon = models.ImageField(upload_to="about/icon")
+
+    class Meta:
+        verbose_name = "Ijtimoiy sahifa"
+        verbose_name_plural = "Ijtimoiy sahifa"
+
