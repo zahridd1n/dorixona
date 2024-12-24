@@ -31,8 +31,13 @@ class ProductSerializer(serializers.ModelSerializer, GeneralMixin):
 
     def get_images(self, obj):
         """Barcha rasmlarni ro'yxat shaklida qaytaradi."""
+        request = self.context.get('request')  # Request ob'ektini kontekstdan olish
+        if not request:
+            return None  # Request mavjud bo'lmasa, bo'sh qiymat qaytariladi
+        
         images = [obj.image1.url, obj.image2.url, obj.image3.url, obj.image4.url]
-        return [img for img in images if img]  # Faqat mavjud bo'lgan rasmlar
+        host = f"{request.scheme}://{request.get_host()}"  # Host va protokolni aniqlash
+        return [f"{host}{img}" for img in images if img] # Faqat mavjud bo'lgan rasmlar
     # Yordamchi metodlar
     def _get_translated_list(self, obj, field_name):
         """Bo'sh joylar bilan ajratilgan so'zlar ro'yxatini qaytaradi."""

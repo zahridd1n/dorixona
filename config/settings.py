@@ -6,7 +6,7 @@ BOT_TOKEN = "7218359593:AAHdu2YxU_o3rM6HCazmdD-XhwBocebI__o"
 GROUP_ID = "-1002440816678"
 SECRET_KEY = 'django-insecure-=kyil+)0^uh=z1^ch(2$=nc6bv@9li^ya_j5jd7((ljzu_r$r-'
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -149,8 +149,8 @@ DATABASES = {
         'NAME': 'ghp',
         'USER': 'ghpuser',
         'PASSWORD': '6914760a',
-        'HOST': 'localhost',
-        # 'HOST': '212.67.14.62',
+        # 'HOST': 'localhost',
+        'HOST': 'localhost' if not DEBUG else '212.67.14.62',
         'PORT': '5432',
     }
 }

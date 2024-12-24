@@ -75,7 +75,7 @@ class HeaderView(APIView):
         products = product_serializer.data
         filtered_products = [
             { 'slug': product.get('slug'), 'name': product.get('name'),'detailmini':product.get('detailmini'),
-             'background':product.get('background'), 'images':product.get('images')}
+             'background':product.get('background'), 'images': product.get('images')}
             for product in products
         ]
 
