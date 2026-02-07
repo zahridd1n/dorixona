@@ -13,65 +13,75 @@ class BaseTitle(models.Model):
         abstract = True
 
 
-class BaseMetaMixin:
-    """Avtomatik verbose_name va verbose_name_plural yaratish."""
-    @classmethod
-    def generate_meta(cls, name):
-        class Meta:
-            verbose_name = f"Sarlavha {name}"
-            verbose_name_plural = f"Sarlavha {name}"
-        return Meta
-
-
 class TitleAbout(BaseTitle):
-    class Meta(BaseMetaMixin.generate_meta("Haqimizda")):
-        pass
+    class Meta:
+        verbose_name = "🏷 Sarlavha — Biz haqimizda"
+        verbose_name_plural = "🏷 Sarlavha — Biz haqimizda"
 
 
 class TitleProduct(BaseTitle):
-    class Meta(BaseMetaMixin.generate_meta("Mahsulotlar")):
-        pass
+    class Meta:
+        verbose_name = "🏷 Sarlavha — Mahsulotlar"
+        verbose_name_plural = "🏷 Sarlavha — Mahsulotlar"
 
 
 class TitleBlog(BaseTitle):
-    class Meta(BaseMetaMixin.generate_meta("Maqolalar")):
-        pass
+    class Meta:
+        verbose_name = "🏷 Sarlavha — Maqolalar"
+        verbose_name_plural = "🏷 Sarlavha — Maqolalar"
 
 
 class TitleVideo(BaseTitle):
-    class Meta(BaseMetaMixin.generate_meta("Videolar")):
-        pass
+    class Meta:
+        verbose_name = "🏷 Sarlavha — Videolar"
+        verbose_name_plural = "🏷 Sarlavha — Videolar"
+
 
 class TitleOffers(BaseTitle):
-    class Meta(BaseMetaMixin.generate_meta("Ustunligimiz")):
-        pass
+    class Meta:
+        verbose_name = "🏷 Sarlavha — Ustunligimiz"
+        verbose_name_plural = "🏷 Sarlavha — Ustunligimiz"
+
 
 class TitleComments(BaseTitle):
-    class Meta(BaseMetaMixin.generate_meta("Mijozlar fikri")):
-        pass
+    class Meta:
+        verbose_name = "🏷 Sarlavha — Mijozlar fikri"
+        verbose_name_plural = "🏷 Sarlavha — Mijozlar fikri"
+
 
 class TitleFaq(BaseTitle):
-    image = models.ImageField(upload_to="faq/icons", verbose_name="FAQ icon")  # Rasm qo'shish
+    image = models.ImageField(upload_to="faq/icons", verbose_name="FAQ icon")
 
-    class Meta(BaseMetaMixin.generate_meta("FAQ")):
-        pass
+    class Meta:
+        verbose_name = "🏷 Sarlavha — FAQ"
+        verbose_name_plural = "🏷 Sarlavha — FAQ"
+
 
 class TitleBanner(BaseTitle):
-    class Meta(BaseMetaMixin.generate_meta("Banner")):
-        pass
+    class Meta:
+        verbose_name = "🏷 Sarlavha — Banner"
+        verbose_name_plural = "🏷 Sarlavha — Banner"
+
 
 class TitleContact(BaseTitle):
-    class Meta(BaseMetaMixin.generate_meta("Kontakt")):
-        pass
+    class Meta:
+        verbose_name = "🏷 Sarlavha — Kontakt"
+        verbose_name_plural = "🏷 Sarlavha — Kontakt"
+
 
 class TitleProductDetail(BaseTitle):
-    class Meta(BaseMetaMixin.generate_meta("Product detail sahifasi")):
-        pass
+    class Meta:
+        verbose_name = "🏷 Sarlavha — Mahsulot sahifasi"
+        verbose_name_plural = "🏷 Sarlavha — Mahsulot sahifasi"
+
 
 class TitleHeader(BaseTitle):
-    class Meta(BaseMetaMixin.generate_meta("Bo'sh bo'lim sahifasi")):
-        pass
+    class Meta:
+        verbose_name = "🏷 Sarlavha — Bosh sahifa"
+        verbose_name_plural = "🏷 Sarlavha — Bosh sahifa"
+
 
 class AboutOfferTitle(BaseTitle):
-    class Meta(BaseMetaMixin.generate_meta("Haqimizda ustunligimiz ")):
-        pass
+    class Meta:
+        verbose_name = "🏷 Sarlavha — Haqimizda ustunlik"
+        verbose_name_plural = "🏷 Sarlavha — Haqimizda ustunlik"
